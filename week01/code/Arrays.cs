@@ -9,11 +9,19 @@ public static class Arrays
     public static double[] MultiplesOf(double number, int length)
     {
         // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // Create a new array with the double required lenght.
+        // Use a for loop to go through each position in the array.
+        // For each index, calculate the multiple of the number.
+        // store the multple in the array at the correct index.
+        // return the complete array.
+        double[] results = new double[length];
+        for (int i = 0; i < length; i++)
+        {
+            results[i] = number * (i + 1);
+        }
 
-        return []; // replace this return statement with your own
+        return results; // replace this return statement with your own
+
     }
 
     /// <summary>
@@ -26,8 +34,18 @@ public static class Arrays
     public static void RotateListRight(List<int> data, int amount)
     {
         // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // Find the position where the list should be split. This will be the length of the list minus the amount to rotate. 
+        // Get the portion from the split point to the end of the list.
+        // get the portion rom the beginning of the list to the split point.
+        // Clear the original list.
+        // Add the right the portion to the list first.
+        // Add the left portion to the list second.
+        // the original list is now rotted to the right.
+        int splitpoint = data.Count - amount;
+        List<int> leftside = data.GetRange(splitpoint, amount);
+        List<int> rightside = data.GetRange(0, splitpoint);
+        data.Clear();
+        data.AddRange(leftside);
+        data.AddRange(rightside);
     }
 }
