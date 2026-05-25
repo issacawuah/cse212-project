@@ -21,8 +21,31 @@ public static class SetsAndMaps
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     public static string[] FindPairs(string[] words)
     {
+         
+{
+    HashSet<string> seen = new HashSet<string>();
+    List<string> result = new List<string>();
+
+    foreach (var word in words)
+    {
+        char[] arr = word.ToCharArray();
+        Array.Reverse(arr);
+        string reversed = new string(arr);
+
+        if (seen.Contains(reversed))
+        {
+            result.Add(reversed + " & " + word);
+        }
+        else
+        {
+            seen.Add(word);
+        }
+    }
+
+    return result.ToArray();
+}
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        
     }
 
     /// <summary>
@@ -42,7 +65,18 @@ public static class SetsAndMaps
         foreach (var line in File.ReadLines(filename))
         {
             var fields = line.Split(",");
+            string degree = fields[3].Trim();
+
+if (!degrees.ContainsKey(degree))
+{
+    degrees[degree] = 1;
+}
+else
+{
+    degrees[degree]++;
+}
             // TODO Problem 2 - ADD YOUR CODE HERE
+            
         }
 
         return degrees;
@@ -66,8 +100,43 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
+        
+{
+    Dictionary<char, int> counts = new Dictionary<char, int>();
+
+    // Clean inputs (ignore spaces + case)
+    word1 = word1.Replace(" ", "").ToLower();
+    word2 = word2.Replace(" ", "").ToLower();
+
+    // If lengths differ, cannot be anagram
+    if (word1.Length != word2.Length)
         return false;
+
+    // Count letters in word1
+    foreach (char c in word1)
+    {
+        if (!counts.ContainsKey(c))
+            counts[c] = 0;
+
+        counts[c]++;
+    }
+
+    // Subtract letters using word2
+    foreach (char c in word2)
+    {
+        if (!counts.ContainsKey(c))
+            return false;
+
+        counts[c]--;
+
+        if (counts[c] < 0)
+            return false;
+    }
+
+    return true;
+}
+        // TODO Problem 3 - ADD YOUR CODE HERE
+        
     }
 
     /// <summary>
